@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.motiontag.sampleapp">
 
-    <!-- IMPORTANT: Custom backup rules must be specified in case the app enables allowBackup feature like below.
+    <!-- Custom backup rules must be specified in case the app enables allowBackup feature.
      Please check my_backup_rules.xml file for more details.  -->
     <application
         android:name="de.motiontag.sampleapp.MyApplication"
