@@ -6,19 +6,11 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/startTrackingButton"
+        android:id="@+id/trackingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/start_tracking_button_text"
-        android:visibility="gone" />
+        android:text="@string/start_tracking" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/stopTrackingButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/stop_tracking_button_text"
-        android:visibility="gone" />
 </RelativeLayout>
 

@@ -31,7 +31,7 @@ class MyApplication : Application(), MotionTag.Callback {
         val notification = NotificationCompat.Builder(context, MY_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification_icon)
             .setContentTitle(context.getString(R.string.app_name))
-            .setContentText(context.getString(R.string.tracking_activated_title))
+            .setContentText(context.getString(R.string.tracking_activated))
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
         notification.flags = Notification.FLAG_ONGOING_EVENT

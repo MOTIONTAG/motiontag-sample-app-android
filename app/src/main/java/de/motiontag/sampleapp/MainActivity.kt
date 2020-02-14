@@ -4,10 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import de.motiontag.tracker.MotionTag
-import kotlinx.android.synthetic.main.activity_main.startTrackingButton
-import kotlinx.android.synthetic.main.activity_main.stopTrackingButton
+import kotlinx.android.synthetic.main.activity_main.trackingButton
 
 private const val JWT_TOKEN = "The JWT token oes here"
 private const val PERMISSIONS_REQUEST_CODE = 100
@@ -18,12 +16,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initButtonOnClickListeners()
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateButtons()
+    override fun onStart() {
+        super.onStart()
+        setTrackingListener()
+        updateTrackingButton()
     }
 
     override fun onRequestPermissionsResult(
@@ -44,34 +42,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initButtonOnClickListeners() {
-        startTrackingButton.setOnClickListener {
-            if (!MotionTag.hasRequiredLocationSettings()) {
-                MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
-            } else if (!MotionTag.hasRequiredPermissions()) {
-                MotionTag.requestRequiredPermissions(this, PERMISSIONS_REQUEST_CODE)
+    private fun setTrackingListener() {
+        trackingButton.setOnClickListener {
+            if (MotionTag.isTrackingActive()) {
+                stopTracking()
             } else {
                 startTracking()
             }
         }
-        stopTrackingButton.setOnClickListener {
-            stopTracking()
-        }
     }
 
     private fun startTracking() {
-        MotionTag.start(JWT_TOKEN)
-        updateButtons()
+        if (!MotionTag.hasRequiredLocationSettings()) {
+            MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
+        } else if (!MotionTag.hasRequiredPermissions()) {
+            MotionTag.requestRequiredPermissions(this, PERMISSIONS_REQUEST_CODE)
+        } else {
+            MotionTag.start(JWT_TOKEN)
+            updateTrackingButton()
+        }
     }
 
     private fun stopTracking() {
         MotionTag.stop()
-        updateButtons()
+        updateTrackingButton()
     }
 
-    private fun updateButtons() {
-        val isActive = MotionTag.isTrackingActive()
-        startTrackingButton.isVisible = !isActive
-        stopTrackingButton.isVisible = isActive
+    private fun updateTrackingButton() {
+        if (MotionTag.isTrackingActive()) {
+            trackingButton.text = getString(R.string.stop_tracking)
+        } else {
+            trackingButton.text = getString(R.string.start_tracking)
+        }
     }
 }
