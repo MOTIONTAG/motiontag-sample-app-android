@@ -11,9 +11,9 @@ import de.motiontag.tracker.MotionTag
 import de.motiontag.tracker.Settings
 import de.motiontag.tracker.models.Event
 
-const val MY_CHANNEL_ID = "my_channel_id"
+const val CHANNEL_ID = "channel_id"
 
-class MyApplication : Application(), MotionTag.Callback {
+class SampleApplication : Application(), MotionTag.Callback {
     override fun onCreate() {
         super.onCreate()
         val notification = getForegroundNotification(this)
@@ -28,7 +28,7 @@ class MyApplication : Application(), MotionTag.Callback {
     private fun getForegroundNotification(context: Context): Notification {
         initNotificationChannel(context)
 
-        val notification = NotificationCompat.Builder(context, MY_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification_icon)
             .setContentTitle(context.getString(R.string.app_name))
             .setContentText(context.getString(R.string.tracking_activated))
@@ -42,10 +42,10 @@ class MyApplication : Application(), MotionTag.Callback {
         val notificationService =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = notificationService.getNotificationChannel(MY_CHANNEL_ID)
+            val notificationChannel = notificationService.getNotificationChannel(CHANNEL_ID)
             if (notificationChannel == null) {
                 val newNotificationChannel = NotificationChannel(
-                    MY_CHANNEL_ID, context.getString(R.string.app_name),
+                    CHANNEL_ID, context.getString(R.string.app_name),
                     NotificationManager.IMPORTANCE_LOW
                 )
                 newNotificationChannel.setShowBadge(false)
