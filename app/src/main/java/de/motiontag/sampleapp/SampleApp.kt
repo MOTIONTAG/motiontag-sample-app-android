@@ -1,12 +1,12 @@
 package de.motiontag.sampleapp
 
 import android.app.Application
+import android.util.Log
 import de.motiontag.sampleapp.utils.getForegroundNotification
+import de.motiontag.sampleapp.utils.toDateTime
 import de.motiontag.tracker.MotionTag
 import de.motiontag.tracker.Settings
 import de.motiontag.tracker.models.Event
-
-const val CHANNEL_ID = "channel_id"
 
 class SampleApp : Application(), MotionTag.Callback {
 
@@ -14,11 +14,23 @@ class SampleApp : Application(), MotionTag.Callback {
         super.onCreate()
 
         val notification = getForegroundNotification()
-        val settings = Settings.Builder().notification(notification).build()
+        val settings = Settings.Builder()
+            .notification(notification)
+            .useBatterySavingMode(true)
+            .useWifiOnlyDataTransfer(true)
+            .turnLoggingOn(true)
+            .build()
         MotionTag.with(this, settings, this)
     }
 
     override fun onEvent(event: Event) {
-        // TODO: Handle SDK events
+        when (event) {
+            is Event.AutoStart -> Log.d("SampleApp", "AutoStart Event: ${event.reason}")
+            is Event.AutoStop -> Log.d("SampleApp", "AutoStop Event: ${event.reason}")
+            is Event.Location -> Log.d("SampleApp", "Location Event: ${event.location}")
+            is Event.Transmission -> Log.d(
+                "SampleApp", "Transmission Event: ${event.transmittedAt.toDateTime()}"
+            )
+        }
     }
 }

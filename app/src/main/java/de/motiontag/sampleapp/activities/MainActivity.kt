@@ -9,7 +9,7 @@ import de.motiontag.sampleapp.R
 import de.motiontag.tracker.MotionTag
 import kotlinx.android.synthetic.main.activity_main.trackingButton
 
-private const val JWT_TOKEN = "The JWT token goes here"
+private const val JWT_TOKEN = "Your JWT token"
 private const val PERMISSIONS_REQUEST_CODE = 100
 private const val SETTINGS_REQUEST_CODE = 200
 
@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SETTINGS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            MotionTag.requestRequiredPermissions(this,
+            MotionTag.requestRequiredPermissions(
+                this,
                 PERMISSIONS_REQUEST_CODE
             )
         }
@@ -58,13 +59,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun startTracking() {
         if (!MotionTag.hasRequiredLocationSettings()) {
-            MotionTag.requestRequiredLocationSettings(this,
-                SETTINGS_REQUEST_CODE
-            )
+            MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
         } else if (!MotionTag.hasRequiredPermissions()) {
-            MotionTag.requestRequiredPermissions(this,
-                PERMISSIONS_REQUEST_CODE
-            )
+            MotionTag.requestRequiredPermissions(this, PERMISSIONS_REQUEST_CODE)
         } else {
             MotionTag.start(JWT_TOKEN)
             updateTrackingButton()
@@ -79,14 +76,10 @@ class MainActivity : AppCompatActivity() {
     private fun updateTrackingButton() {
         if (MotionTag.isTrackingActive()) {
             trackingButton.text = getString(R.string.stop_tracking)
-            trackingButton.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.red
-            ))
+            trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         } else {
             trackingButton.text = getString(R.string.start_tracking)
-            trackingButton.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.green
-            ))
+            trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
         }
     }
 }
