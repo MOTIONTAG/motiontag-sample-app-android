@@ -8,7 +8,7 @@ import de.motiontag.tracker.models.Event
 
 const val CHANNEL_ID = "channel_id"
 
-class SampleApplication : Application(), MotionTag.Callback {
+class SampleApp : Application(), MotionTag.Callback {
 
     override fun onCreate() {
         super.onCreate()

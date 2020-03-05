@@ -5,7 +5,7 @@
     <!-- Custom backup rules must be specified in case the app enables allowBackup feature.
      Please check my_backup_rules.xml file for more details.  -->
     <application
-        android:name="de.motiontag.sampleapp.SampleApplication"
+        android:name="de.motiontag.sampleapp.SampleApp"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
