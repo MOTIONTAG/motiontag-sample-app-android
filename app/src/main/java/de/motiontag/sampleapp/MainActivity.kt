@@ -1,11 +1,10 @@
-package de.motiontag.sampleapp.activities
+package de.motiontag.sampleapp
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import de.motiontag.sampleapp.R
 import de.motiontag.tracker.MotionTag
 import kotlinx.android.synthetic.main.activity_main.trackingButton
 
@@ -59,9 +58,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun startTracking() {
         if (!MotionTag.hasRequiredLocationSettings()) {
-            MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
+            MotionTag.requestRequiredLocationSettings(this,
+                SETTINGS_REQUEST_CODE
+            )
         } else if (!MotionTag.hasRequiredPermissions()) {
-            MotionTag.requestRequiredPermissions(this, PERMISSIONS_REQUEST_CODE)
+            MotionTag.requestRequiredPermissions(this,
+                PERMISSIONS_REQUEST_CODE
+            )
         } else {
             MotionTag.start(JWT_TOKEN)
             updateTrackingButton()

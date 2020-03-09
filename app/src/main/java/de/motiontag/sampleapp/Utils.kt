@@ -1,4 +1,4 @@
-package de.motiontag.sampleapp.utils
+package de.motiontag.sampleapp
 
 import android.app.Notification
 import android.app.NotificationChannel

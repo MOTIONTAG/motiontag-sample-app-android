@@ -2,8 +2,6 @@ package de.motiontag.sampleapp
 
 import android.app.Application
 import android.util.Log
-import de.motiontag.sampleapp.utils.getForegroundNotification
-import de.motiontag.sampleapp.utils.toDateTime
 import de.motiontag.tracker.MotionTag
 import de.motiontag.tracker.Settings
 import de.motiontag.tracker.models.Event
