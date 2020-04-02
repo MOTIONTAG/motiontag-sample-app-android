@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import de.motiontag.tracker.MotionTag
 import kotlinx.android.synthetic.main.activity_main.trackingButton
 
-private const val JWT_TOKEN = "Your JWT token"
+private const val USER_TOKEN = "User's JWT token"
 private const val PERMISSIONS_REQUEST_CODE = 100
 private const val SETTINGS_REQUEST_CODE = 200
 
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 PERMISSIONS_REQUEST_CODE
             )
         } else {
-            MotionTag.start(JWT_TOKEN)
+            MotionTag.start(USER_TOKEN)
             updateTrackingButton()
         }
     }

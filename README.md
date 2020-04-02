@@ -23,3 +23,11 @@ More information can be found on our website.
 **Documentation:** https://motion-tag.com/en/developers/android-documentation.html
 
 **Changelog:** https://motion-tag.com/en/developers/android-changelog.html
+
+
+## Starting the sample app
+
+1. Clone this repository
+2. Open project with AndroidStudio
+3. Update `USER_TOKEN` with a valid token
+4. Run the project
