@@ -5,12 +5,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import de.motiontag.sampleapp.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-const val CHANNEL_ID = "channel_id"
+private const val TRACKING_CHANNEL_ID = "tracking_channel"
 
 fun Long.toDateTime(): String {
     val formatter = SimpleDateFormat.getDateTimeInstance()
@@ -20,9 +20,10 @@ fun Long.toDateTime(): String {
 }
 
 fun Context.getForegroundNotification(): Notification {
-    this.initNotificationChannel()
-
-    val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        createNotificationChannel()
+    }
+    val notification = NotificationCompat.Builder(this, TRACKING_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_notification_icon)
         .setContentTitle(this.getString(R.string.app_name))
         .setContentText(this.getString(R.string.tracking_active))
@@ -32,18 +33,15 @@ fun Context.getForegroundNotification(): Notification {
     return notification
 }
 
-private fun Context.initNotificationChannel() {
+@RequiresApi(Build.VERSION_CODES.O)
+private fun Context.createNotificationChannel() {
     val notificationService =
         this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val notificationChannel = notificationService.getNotificationChannel(CHANNEL_ID)
-        if (notificationChannel == null) {
-            val newNotificationChannel = NotificationChannel(
-                CHANNEL_ID, this.getString(R.string.app_name),
-                NotificationManager.IMPORTANCE_LOW
-            )
-            newNotificationChannel.setShowBadge(false)
-            notificationService.createNotificationChannel(newNotificationChannel)
-        }
-    }
+    val title = this.getString(R.string.notification_channel_title)
+    val description = this.getString(R.string.notification_channel_description)
+    val notificationChannel =
+        NotificationChannel(TRACKING_CHANNEL_ID, title, NotificationManager.IMPORTANCE_LOW)
+    notificationChannel.description = description
+    notificationChannel.setShowBadge(false)
+    notificationService.createNotificationChannel(notificationChannel)
 }

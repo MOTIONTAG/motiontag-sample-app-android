@@ -3,4 +3,6 @@
     <string name="start_tracking">Start Tracking</string>
     <string name="stop_tracking">Stop Tracking</string>
     <string name="tracking_active">Tracking is active</string>
+    <string name="notification_channel_title">Mobility tracking status</string>
+    <string name="notification_channel_description">Display notification when mobility tracking is active</string>
 </resources>
