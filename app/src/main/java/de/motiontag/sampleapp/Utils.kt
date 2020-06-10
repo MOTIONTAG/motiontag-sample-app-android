@@ -7,17 +7,8 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import java.text.SimpleDateFormat
-import java.util.*
 
 private const val TRACKING_CHANNEL_ID = "tracking_channel"
-
-fun Long.toDateTime(): String {
-    val formatter = SimpleDateFormat.getDateTimeInstance()
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = this
-    return formatter.format(calendar.time)
-}
 
 fun Context.getForegroundNotification(): Notification {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

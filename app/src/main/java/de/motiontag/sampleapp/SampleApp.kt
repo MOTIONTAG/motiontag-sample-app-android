@@ -2,9 +2,9 @@ package de.motiontag.sampleapp
 
 import android.app.Application
 import android.util.Log
-import de.motiontag.tracker.MotionTag
-import de.motiontag.tracker.Settings
-import de.motiontag.tracker.models.Event
+import de.motiontag.tracker.*
+
+private const val LOG_TAG = "SampleApp"
 
 class SampleApp : Application(), MotionTag.Callback {
 
@@ -16,19 +16,21 @@ class SampleApp : Application(), MotionTag.Callback {
             .notification(notification)
             .useBatterySavingMode(true)
             .useWifiOnlyDataTransfer(true)
-            .turnLoggingOn(true)
             .build()
         MotionTag.with(this, settings, this)
     }
 
     override fun onEvent(event: Event) {
         when (event) {
-            is Event.AutoStart -> Log.d("SampleApp", "AutoStart Event: ${event.reason}")
-            is Event.AutoStop -> Log.d("SampleApp", "AutoStop Event: ${event.reason}")
-            is Event.Location -> Log.d("SampleApp", "Location Event: ${event.location}")
-            is Event.Transmission -> Log.d(
-                "SampleApp", "Transmission Event: ${event.transmittedAt.toDateTime()}"
-            )
+            is AutoStartEvent -> Log.d(LOG_TAG, "AutoStart: $event")
+            is AutoStopEvent -> Log.d(LOG_TAG, "AutoStop: $event")
+            is LocationEvent -> Log.d(LOG_TAG, "Location: $event")
+            is TransmissionEvent -> {
+                when (event) {
+                    is TransmissionEvent.Success -> Log.d(LOG_TAG, "Transmission Success: $event")
+                    is TransmissionEvent.Error -> Log.d(LOG_TAG, "Transmission Error: $event")
+                }
+            }
         }
     }
 }
