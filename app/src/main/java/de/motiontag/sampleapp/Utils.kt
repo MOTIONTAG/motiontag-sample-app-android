@@ -3,7 +3,9 @@ package de.motiontag.sampleapp
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -19,9 +21,16 @@ fun Context.getForegroundNotification(): Notification {
         .setContentTitle(this.getString(R.string.app_name))
         .setContentText(this.getString(R.string.tracking_active))
         .setPriority(NotificationCompat.PRIORITY_LOW)
+        .setContentIntent(this.getContentIntent())
         .build()
     notification.flags = Notification.FLAG_ONGOING_EVENT
     return notification
+}
+
+private fun Context.getContentIntent(): PendingIntent {
+    val intent = Intent(this, MainActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
