@@ -20,9 +20,9 @@ More information can be found on our website.
 
 **Website:** https://motion-tag.com/
 
-**Documentation:** https://motion-tag.com/en/developers/android-documentation.html
+**Documentation:** https://api.motion-tag.de/developer/android
 
-**Changelog:** https://motion-tag.com/en/developers/android-changelog.html
+**Changelog:** https://api.motion-tag.de/developer/android_changelog
 
 
 ## Starting the sample app
