@@ -4,15 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import de.motiontag.tracker.MotionTag
-import kotlinx.android.synthetic.main.activity_main.trackingButton
+import kotlinx.android.synthetic.main.activity_main.*
 
 private const val USER_TOKEN = "User's JWT token"
 private const val PERMISSIONS_REQUEST_CODE = 100
 private const val SETTINGS_REQUEST_CODE = 200
 
 class MainActivity : AppCompatActivity() {
+
+    private val requiredPermissions: Array<String> = MotionTag.getRequiredPermissions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +33,21 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSIONS_REQUEST_CODE && MotionTag.hasRequiredPermissions()) {
-            startTracking()
+        if (requestCode != PERMISSIONS_REQUEST_CODE) return
+
+        if (MotionTag.hasRequiredPermissions()) {
+            checkSettingsAndPermissions()
+        } else {
+            showPermissionsDeniedDialog(this)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SETTINGS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            MotionTag.requestRequiredPermissions(
-                this,
-                PERMISSIONS_REQUEST_CODE
-            )
+        if (requestCode != SETTINGS_REQUEST_CODE) return
+
+        if (resultCode == Activity.RESULT_OK) {
+            checkSettingsAndPermissions()
         }
     }
 
@@ -51,28 +56,43 @@ class MainActivity : AppCompatActivity() {
             if (MotionTag.isTrackingActive()) {
                 stopTracking()
             } else {
-                startTracking()
+                checkSettingsAndPermissions()
             }
         }
     }
 
-    private fun startTracking() {
+    private fun checkSettingsAndPermissions() {
         if (!MotionTag.hasRequiredLocationSettings()) {
-            MotionTag.requestRequiredLocationSettings(this,
-                SETTINGS_REQUEST_CODE
-            )
+            requestLocationSettings()
         } else if (!MotionTag.hasRequiredPermissions()) {
-            MotionTag.requestRequiredPermissions(this,
-                PERMISSIONS_REQUEST_CODE
-            )
+            requestPermissionsOrShowRationale()
         } else {
-            MotionTag.start(USER_TOKEN)
-            updateTrackingButton()
+            startTracking()
+        }
+    }
+
+    private fun requestLocationSettings() {
+        MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
+    }
+
+    private fun requestPermissionsOrShowRationale() {
+        val rationalePermissions = getRationalePermissions()
+        if (rationalePermissions.isEmpty()) {
+            requestRequiredPermissions()
+        } else {
+            showPermissionsRationaleDialog(this, rationalePermissions) {
+                requestRequiredPermissions()
+            }
         }
     }
 
     private fun stopTracking() {
         MotionTag.stop()
+        updateTrackingButton()
+    }
+
+    private fun startTracking() {
+        MotionTag.start(USER_TOKEN)
         updateTrackingButton()
     }
 
@@ -83,6 +103,16 @@ class MainActivity : AppCompatActivity() {
         } else {
             trackingButton.text = getString(R.string.start_tracking)
             trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        }
+    }
+
+    private fun requestRequiredPermissions() {
+        ActivityCompat.requestPermissions(this, requiredPermissions, PERMISSIONS_REQUEST_CODE)
+    }
+
+    private fun getRationalePermissions(): List<String> {
+        return requiredPermissions.filter { permission ->
+            ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
         }
     }
 }
