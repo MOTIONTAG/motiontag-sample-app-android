@@ -4,12 +4,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
     defaultConfig {
         applicationId "de.motiontag.sampleapp"
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,8 +32,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // MotionTag SDK changelog: https://motion-tag.com/en/developers/android-changelog.html
-    implementation "de.motiontag:tracker:3.0.0"
+    // MotionTag SDK changelog: https://api.motion-tag.de/developer/android_changelog
+    implementation "de.motiontag:tracker:4.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.1.0"

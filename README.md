@@ -1,7 +1,7 @@
-## Android sample app for the MotionTag Mobility & Location Analytics SDK
+## Android sample app for the MOTIONTAG Mobility & Location Analytics SDK
 
-The MotionTag Mobility & Location Analytics SDK enables to collect raw sensor data of the telephone in
-a battery efficient way. This data is then transmitted to the MotionTag back-end system (ISO 27001 certified).
+The MOTIONTAG Mobility & Location Analytics SDK enables to collect raw sensor data of the telephone in
+a battery efficient way. This data is then transmitted to the MOTIONTAG back-end system (ISO 27001 certified).
 In the backend, the sensor events are processed and a partial journey is constructed. Journeys consist
 either solely of tracks or tracks plus stays. Tracks describe a movement from a origin to a destination with
 a certain mode of transport. Stays symbolize a stationary behaviour with a particular purpose for the visit.
@@ -12,7 +12,7 @@ This way the effectiveness of the current infrastructure and the passenger flow 
 the design of new mobility services. By implementing and using the SDK you can make use of these findings
 to improve timetables and routes, expand transport supply and attract more passengers.
 
-If you integrate MotionTag Tracker SDK inside your own application, you can either download
+If you integrate the MOTIONTAG SDK inside your own application, you can either download
 user journeys via a provided dump interface on the internet or we tailor a customized solution to
 your needs.
 

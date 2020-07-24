@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import de.motiontag.tracker.MotionTag
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,8 +13,6 @@ private const val PERMISSIONS_REQUEST_CODE = 100
 private const val SETTINGS_REQUEST_CODE = 200
 
 class MainActivity : AppCompatActivity() {
-
-    private val requiredPermissions: Array<String> = MotionTag.getRequiredPermissions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +32,10 @@ class MainActivity : AppCompatActivity() {
     ) {
         if (requestCode != PERMISSIONS_REQUEST_CODE) return
 
-        if (MotionTag.hasRequiredPermissions()) {
-            checkSettingsAndPermissions()
-        } else {
+        if (containsDeniedResult(grantResults)) {
             showPermissionsDeniedDialog(this)
+        } else {
+            checkSettingsAndPermissions()
         }
     }
 
@@ -65,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         if (!MotionTag.hasRequiredLocationSettings()) {
             requestLocationSettings()
         } else if (!MotionTag.hasRequiredPermissions()) {
-            requestPermissionsOrShowRationale()
+            requestPermissionsOrShowRationale(this, PERMISSIONS_REQUEST_CODE)
         } else {
             startTracking()
         }
@@ -73,17 +70,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestLocationSettings() {
         MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
-    }
-
-    private fun requestPermissionsOrShowRationale() {
-        val rationalePermissions = getRationalePermissions()
-        if (rationalePermissions.isEmpty()) {
-            requestRequiredPermissions()
-        } else {
-            showPermissionsRationaleDialog(this, rationalePermissions) {
-                requestRequiredPermissions()
-            }
-        }
     }
 
     private fun stopTracking() {
@@ -103,16 +89,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             trackingButton.text = getString(R.string.start_tracking)
             trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
-        }
-    }
-
-    private fun requestRequiredPermissions() {
-        ActivityCompat.requestPermissions(this, requiredPermissions, PERMISSIONS_REQUEST_CODE)
-    }
-
-    private fun getRationalePermissions(): List<String> {
-        return requiredPermissions.filter { permission ->
-            ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
         }
     }
 }
