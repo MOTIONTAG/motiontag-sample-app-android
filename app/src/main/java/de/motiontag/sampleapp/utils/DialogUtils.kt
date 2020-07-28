@@ -1,4 +1,4 @@
-package de.motiontag.sampleapp
+package de.motiontag.sampleapp.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import de.motiontag.sampleapp.R
 
 fun showPermissionsRationaleDialog(
     context: Context,
@@ -31,7 +32,11 @@ fun showPermissionsDeniedDialog(activity: Activity) {
     )
         .setTitle(R.string.permissions_denied_dialog_title)
         .setMessage(R.string.permissions_denied_dialog_message)
-        .setPositiveButton(R.string.go_to_settings) { _, _ -> openAppSettings(activity) }
+        .setPositiveButton(R.string.go_to_settings) { _, _ ->
+            openAppSettings(
+                activity
+            )
+        }
         .setNegativeButton(android.R.string.cancel, null)
         .create()
         .show()

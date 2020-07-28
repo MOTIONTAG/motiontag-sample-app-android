@@ -1,4 +1,4 @@
-package de.motiontag.sampleapp
+package de.motiontag.sampleapp.utils
 
 import android.Manifest
 import android.app.Activity
@@ -17,10 +17,21 @@ fun hasPermission(activity: Activity, permission: String): Boolean {
 fun requestPermissionsOrShowRationale(activity: Activity, requestCode: Int) {
     val permissionsToRationale = activity.getPermissionsToRationale()
     if (permissionsToRationale.isEmpty()) {
-        requestPermissions(activity, activity.getPermissions(), requestCode)
+        requestPermissions(
+            activity,
+            activity.getPermissions(),
+            requestCode
+        )
     } else {
-        showPermissionsRationaleDialog(activity, permissionsToRationale) {
-            requestPermissions(activity, activity.getPermissions(), requestCode)
+        showPermissionsRationaleDialog(
+            activity,
+            permissionsToRationale
+        ) {
+            requestPermissions(
+                activity,
+                activity.getPermissions(),
+                requestCode
+            )
         }
     }
 }
@@ -53,5 +64,8 @@ private fun requestPermissions(activity: Activity, permissions: List<String>, re
 // https://developer.android.com/preview/privacy/location#background-location
 private fun Activity.isAllowedToRequestBackgroundLocation(): Boolean {
     return Build.VERSION.SDK_INT < Build.VERSION_CODES.R
-            || hasPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            || hasPermission(
+        this,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
 }

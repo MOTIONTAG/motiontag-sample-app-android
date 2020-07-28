@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import de.motiontag.sampleapp.utils.containsDeniedResult
+import de.motiontag.sampleapp.utils.requestPermissionsOrShowRationale
+import de.motiontag.sampleapp.utils.showPermissionsDeniedDialog
 import de.motiontag.tracker.MotionTag
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -62,7 +65,10 @@ class MainActivity : AppCompatActivity() {
         if (!MotionTag.hasRequiredLocationSettings()) {
             requestLocationSettings()
         } else if (!MotionTag.hasRequiredPermissions()) {
-            requestPermissionsOrShowRationale(this, PERMISSIONS_REQUEST_CODE)
+            requestPermissionsOrShowRationale(
+                this,
+                PERMISSIONS_REQUEST_CODE
+            )
         } else {
             startTracking()
         }

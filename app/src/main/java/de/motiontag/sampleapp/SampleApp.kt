@@ -2,6 +2,7 @@ package de.motiontag.sampleapp
 
 import android.app.Application
 import android.util.Log
+import de.motiontag.sampleapp.utils.getForegroundNotification
 import de.motiontag.tracker.*
 
 private const val LOG_TAG = "SampleApp"
