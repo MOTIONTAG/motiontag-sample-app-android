@@ -65,10 +65,7 @@ class MainActivity : AppCompatActivity() {
         if (!MotionTag.hasRequiredLocationSettings()) {
             requestLocationSettings()
         } else if (!MotionTag.hasRequiredPermissions()) {
-            requestPermissionsOrShowRationale(
-                this,
-                PERMISSIONS_REQUEST_CODE
-            )
+            requestPermissionsOrShowRationale(this, PERMISSIONS_REQUEST_CODE)
         } else {
             startTracking()
         }

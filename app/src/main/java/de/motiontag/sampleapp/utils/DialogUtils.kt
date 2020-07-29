@@ -8,15 +8,14 @@ import android.provider.Settings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.motiontag.sampleapp.R
 
+private const val DIALOG_STYLE: Int = R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+
 fun showPermissionsRationaleDialog(
     context: Context,
     permissions: List<String>,
     positiveAction: () -> (Unit)
 ) {
-    MaterialAlertDialogBuilder(
-        context,
-        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-    )
+    MaterialAlertDialogBuilder(context, DIALOG_STYLE)
         .setTitle(R.string.permissions_required_dialog_title)
         .setMessage(context.getString(R.string.permissions_required_dialog_message, permissions))
         .setPositiveButton(android.R.string.ok) { _, _ -> positiveAction.invoke() }
@@ -26,17 +25,10 @@ fun showPermissionsRationaleDialog(
 }
 
 fun showPermissionsDeniedDialog(activity: Activity) {
-    MaterialAlertDialogBuilder(
-        activity,
-        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-    )
+    MaterialAlertDialogBuilder(activity, DIALOG_STYLE)
         .setTitle(R.string.permissions_denied_dialog_title)
         .setMessage(R.string.permissions_denied_dialog_message)
-        .setPositiveButton(R.string.go_to_settings) { _, _ ->
-            openAppSettings(
-                activity
-            )
-        }
+        .setPositiveButton(R.string.go_to_settings) { _, _ -> openAppSettings(activity) }
         .setNegativeButton(android.R.string.cancel, null)
         .create()
         .show()
