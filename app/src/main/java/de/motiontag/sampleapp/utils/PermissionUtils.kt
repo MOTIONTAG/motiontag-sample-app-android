@@ -38,7 +38,7 @@ private fun Activity.getPermissionsToRationale(): List<String> {
 
 private fun Activity.getPermissions(): List<String> {
     val permissions = MotionTag.getDeniedRequiredPermissions()
-    return if (this.isAllowedToRequestBackgroundLocation()) {
+    return if (isAllowedToRequestBackgroundLocation()) {
         permissions
     } else {
         permissions.minus(Manifest.permission.ACCESS_BACKGROUND_LOCATION)

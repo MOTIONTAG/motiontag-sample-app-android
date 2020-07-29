@@ -38,7 +38,6 @@ private fun openAppSettings(activity: Activity) {
     val scheme = "package"
     val intent = Intent()
     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     val uri = Uri.fromParts(scheme, activity.packageName, null)
     intent.data = uri
     activity.startActivity(intent)
