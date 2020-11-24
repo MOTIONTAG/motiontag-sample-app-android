@@ -18,12 +18,11 @@ fun Context.getForegroundNotification(): Notification {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         createNotificationChannel()
     }
-    val notification = NotificationCompat.Builder(this,
-        TRACKING_CHANNEL_ID
-    )
+    val notification = NotificationCompat.Builder(this, TRACKING_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_notification_icon)
         .setContentTitle(this.getString(R.string.app_name))
         .setContentText(this.getString(R.string.tracking_active))
+        // Starting from SDK version 5.0.0, it is recommended to use a low priority notification
         .setPriority(NotificationCompat.PRIORITY_LOW)
         .setContentIntent(this.getContentIntent())
         .build()
@@ -43,6 +42,7 @@ private fun Context.createNotificationChannel() {
         this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val title = this.getString(R.string.notification_channel_title)
     val description = this.getString(R.string.notification_channel_description)
+    // Starting from SDK version 5.0.0, it is recommended to use a low importance channel
     val notificationChannel =
         NotificationChannel(TRACKING_CHANNEL_ID, title, NotificationManager.IMPORTANCE_LOW)
     notificationChannel.description = description
