@@ -3,7 +3,7 @@
     package="de.motiontag.sampleapp">
 
     <!-- Custom backup rules must be specified in case the app enables allowBackup feature.
-     Please check my_backup_rules.xml file for more details.  -->
+     Please check backup_rules.xml file for more details.  -->
     <application
         android:name="de.motiontag.sampleapp.SampleApp"
         android:allowBackup="true"
@@ -22,5 +22,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

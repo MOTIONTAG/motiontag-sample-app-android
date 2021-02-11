@@ -2,8 +2,4 @@
 <!-- This file is only necessary in case the app enables allowBackup feature inside AndroidManifest.xml -->
 <full-backup-content>
     <exclude domain="sharedpref" path="motiontag_tracker.xml"/>
-    <exclude domain="database" path="motiontag_tracker.db"/>
-    <exclude domain="database" path="motiontag_tracker.db-shm"/>
-    <exclude domain="database" path="motiontag_tracker.db-wal"/>
-    <exclude domain="database" path="motiontag_tracker.db-journal"/>
 </full-backup-content>
