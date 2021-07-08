@@ -13,11 +13,8 @@ class SampleApp : Application(), MotionTag.Callback {
         super.onCreate()
 
         val notification = getForegroundNotification()
-        val settings = Settings.Builder()
-            .notification(notification)
-            .useWifiOnlyDataTransfer(true)
-            .build()
-        MotionTag.with(this, settings, this)
+        val settings = Settings(notification, isWifiOnlyDataTransfer = false)
+        MotionTag.getInstance().initialize(this, settings, this)
     }
 
     override fun onEvent(event: Event) {

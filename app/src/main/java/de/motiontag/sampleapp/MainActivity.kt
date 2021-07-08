@@ -17,6 +17,8 @@ private const val SETTINGS_REQUEST_CODE = 200
 
 class MainActivity : AppCompatActivity() {
 
+    private val motionTag: MotionTag by lazy { MotionTag.getInstance() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTrackingListener() {
         trackingButton.setOnClickListener {
-            if (MotionTag.isTrackingActive()) {
+            if (motionTag.isTrackingActive()) {
                 stopTracking()
             } else {
                 checkSettingsAndPermissions()
@@ -62,9 +64,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkSettingsAndPermissions() {
-        if (!MotionTag.hasRequiredLocationSettings()) {
+        if (!motionTag.hasRequiredLocationSettings()) {
             requestLocationSettings()
-        } else if (!MotionTag.hasRequiredPermissions()) {
+        } else if (!motionTag.hasRequiredPermissions()) {
             requestPermissionsOrShowRationale(this, PERMISSIONS_REQUEST_CODE)
         } else {
             startTracking()
@@ -72,21 +74,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestLocationSettings() {
-        MotionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
+        motionTag.requestRequiredLocationSettings(this, SETTINGS_REQUEST_CODE)
     }
 
     private fun stopTracking() {
-        MotionTag.stop()
+        motionTag.stop()
         updateTrackingButton()
     }
 
     private fun startTracking() {
-        MotionTag.start(USER_TOKEN)
+        motionTag.userToken(USER_TOKEN)
+        motionTag.start()
         updateTrackingButton()
     }
 
     private fun updateTrackingButton() {
-        if (MotionTag.isTrackingActive()) {
+        if (motionTag.isTrackingActive()) {
             trackingButton.text = getString(R.string.stop_tracking)
             trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         } else {
