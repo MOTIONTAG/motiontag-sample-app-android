@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != PERMISSIONS_REQUEST_CODE) return
 
         if (containsDeniedResult(grantResults)) {
