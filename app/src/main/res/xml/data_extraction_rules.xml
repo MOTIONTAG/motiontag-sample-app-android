@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is only necessary in case the app enables allowBackup feature inside AndroidManifest.xml.
+This config file is only applicable when targeting Android API 31 or higher.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="motiontag_tracker.xml"/>
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="motiontag_tracker.xml"/>
+    </device-transfer>
+</data-extraction-rules>

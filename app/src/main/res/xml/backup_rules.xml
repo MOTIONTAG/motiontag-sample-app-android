@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This file is only necessary in case the app enables allowBackup feature inside AndroidManifest.xml -->
-<full-backup-content>
-    <exclude domain="sharedpref" path="motiontag_tracker.xml"/>
-</full-backup-content>
