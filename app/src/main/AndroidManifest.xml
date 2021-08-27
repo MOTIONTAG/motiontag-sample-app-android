@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="de.motiontag.sampleapp">
 
     <!-- Custom backup rules must be specified in case the app enables allowBackup feature.
-     Please check backup_rules.xml file for more details.  -->
+     Please check the documentation and the full_backup_rules.xml / data_extraction_rules.xml files for more details.  -->
     <application
         android:name="de.motiontag.sampleapp.SampleApp"
         android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_rules"
+        android:fullBackupContent="@xml/full_backup_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:targetApi="s">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
