@@ -32,10 +32,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // MOTIONTAG SDK changelog: https://api.motion-tag.de/developer/android_changelog
-    implementation "de.motiontag:tracker:6.2.0-rc01"
+    implementation "de.motiontag:tracker:6.2.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:1.4.2"
+    implementation "androidx.appcompat:appcompat:1.5.0"
     implementation "androidx.core:core-ktx:1.8.0"
     implementation "com.google.android.material:material:1.6.1"
 }
