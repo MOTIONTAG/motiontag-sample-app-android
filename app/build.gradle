@@ -6,7 +6,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
         applicationId "de.motiontag.sampleapp"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -32,10 +32,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // MOTIONTAG SDK changelog: https://api.motion-tag.de/developer/android_changelog
-    implementation "de.motiontag:tracker:6.2.0"
+    implementation "de.motiontag:tracker:7.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:1.5.0"
-    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "androidx.core:core-ktx:1.9.0"
     implementation "com.google.android.material:material:1.6.1"
 }
