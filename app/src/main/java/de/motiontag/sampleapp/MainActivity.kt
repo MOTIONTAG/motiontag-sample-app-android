@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTrackingListener() {
         trackingButton.setOnClickListener {
-            if (motionTag.isTrackingActive()) {
+            if (motionTag.isTrackingActive) {
                 stopTracking()
             } else {
                 checkSettingsAndPermissions()
@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkSettingsAndPermissions() {
-        if (!motionTag.hasRequiredLocationSettings()) {
+        if (!motionTag.hasRequiredLocationSettings) {
             requestLocationSettings()
-        } else if (!motionTag.hasRequiredPermissions()) {
+        } else if (!motionTag.hasRequiredPermissions) {
             requestPermissionsOrShowRationale(this, PERMISSIONS_REQUEST_CODE)
         } else {
             startTracking()
@@ -84,13 +84,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTracking() {
-        motionTag.userToken(USER_TOKEN)
+        motionTag.userToken = USER_TOKEN
         motionTag.start()
         updateTrackingButton()
     }
 
     private fun updateTrackingButton() {
-        if (motionTag.isTrackingActive()) {
+        if (motionTag.isTrackingActive) {
             trackingButton.text = getString(R.string.stop_tracking)
             trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         } else {

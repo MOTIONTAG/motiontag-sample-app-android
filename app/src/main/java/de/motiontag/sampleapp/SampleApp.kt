@@ -11,10 +11,10 @@ class SampleApp : Application(), MotionTag.Callback {
 
     override fun onCreate() {
         super.onCreate()
-
         val notification = getForegroundNotification()
-        val settings = Settings(notification, isWifiOnlyDataTransfer = false)
-        MotionTag.getInstance().initialize(this, settings, this)
+        val motionTag = MotionTag.getInstance()
+        motionTag.initialize(this, notification, this)
+        motionTag.wifiOnlyDataTransfer = false
     }
 
     override fun onEvent(event: Event) {
@@ -24,6 +24,8 @@ class SampleApp : Application(), MotionTag.Callback {
             is LocationEvent -> Log.d(LOG_TAG, "Location: $event")
             is TransmissionEvent.Success -> Log.d(LOG_TAG, "Transmission Success: $event")
             is TransmissionEvent.Error -> Log.d(LOG_TAG, "Transmission Error: $event")
+            is BatteryOptimizationsChangedEvent -> Log.d(LOG_TAG, "Battery Optimizations Changed: $event")
+            is PowerSaveModeChangedEvent -> Log.d(LOG_TAG, "Power Save Mode Changed: $event")
         }
     }
 }
