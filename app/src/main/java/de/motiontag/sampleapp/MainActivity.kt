@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import de.motiontag.sampleapp.databinding.ActivityMainBinding
 import de.motiontag.sampleapp.utils.containsDeniedResult
 import de.motiontag.sampleapp.utils.requestPermissionsOrShowRationale
 import de.motiontag.sampleapp.utils.showPermissionsDeniedDialog
 import de.motiontag.tracker.MotionTag
-import kotlinx.android.synthetic.main.activity_main.*
 
 private const val USER_TOKEN = "User's JWT token"
 private const val PERMISSIONS_REQUEST_CODE = 100
@@ -18,10 +18,12 @@ private const val SETTINGS_REQUEST_CODE = 200
 class MainActivity : AppCompatActivity() {
 
     private val motionTag: MotionTag by lazy { MotionTag.getInstance() }
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onStart() {
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTrackingListener() {
-        trackingButton.setOnClickListener {
+        binding.trackingButton.setOnClickListener {
             if (motionTag.isTrackingActive) {
                 stopTracking()
             } else {
@@ -90,6 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTrackingButton() {
+        val trackingButton = binding.trackingButton
         if (motionTag.isTrackingActive) {
             trackingButton.text = getString(R.string.stop_tracking)
             trackingButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
