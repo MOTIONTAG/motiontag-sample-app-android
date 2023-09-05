@@ -10,4 +10,16 @@
     <string name="permissions_required_dialog_message">The app needs the following permissions in order to start tracking: %s</string>
     <string name="permissions_denied_dialog_title">Permission(s) denied</string>
     <string name="permissions_denied_dialog_message">Tracking could not start due to missing permissions.</string>
+
+    <!-- ONBOARDING SCREENS -->
+    <string name="onboarding_enable">Enable</string>
+    <string name="onboarding_ok_understood">OK, understood</string>
+    <string name="onboarding_skip_button">Skip</string>
+    <string name="onboarding_location_settings_headline">Enable Location</string>
+    <string name="onboarding_location_settings_content">We\’re all about movements. We can\'t measure
+        your mobility if your phone doesn\'t know where you are.</string>
+    <string name="onboarding_location_permission_headline">Location permission</string>
+    <string name="onboarding_location_permission_content">This app collects location data to enable you to enjoy insights into your travel behaviour, even when the app is closed or not in use.
+        \nPlease let us know your location all the time.\nYou can turn off tracking anytime in the app settings.</string>
+
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/skip_location_permission_button"
+        style="@style/Onboarding.Button.Skip"
+        android:textColor="@android:color/white"
+        android:text="@string/onboarding_skip_button" />
+
+    <ScrollView
+        style="@style/Onboarding.Page"
+        android:layout_above="@id/location_permission_button"
+        android:layout_below="@id/skip_location_permission_button"
+        android:layout_centerInParent="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/Onboarding.Image"
+                android:src="@drawable/ic_onboarding_location_permission" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Onboarding.Headline"
+                android:text="@string/onboarding_location_permission_headline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Onboarding.Content"
+                android:text="@string/onboarding_location_permission_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/location_permission_button"
+        style="@style/Onboarding.Button.Action"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
+        android:text="@string/onboarding_enable" />
+</RelativeLayout>

@@ -12,8 +12,8 @@ import de.motiontag.sampleapp.utils.showPermissionsDeniedDialog
 import de.motiontag.tracker.MotionTag
 
 private const val USER_TOKEN = "User's JWT token"
-private const val PERMISSIONS_REQUEST_CODE = 100
-private const val SETTINGS_REQUEST_CODE = 200
+const val PERMISSIONS_REQUEST_CODE = 100
+const val SETTINGS_REQUEST_CODE = 200
 
 class MainActivity : AppCompatActivity() {
 

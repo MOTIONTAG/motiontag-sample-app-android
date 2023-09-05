@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 33
@@ -40,4 +41,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.5.1"
     implementation "androidx.core:core-ktx:1.9.0"
     implementation "com.google.android.material:material:1.6.1"
+    implementation "com.google.dagger:dagger:2.44.2"
+    kapt "com.google.dagger:dagger-compiler:2.44.2"
 }
