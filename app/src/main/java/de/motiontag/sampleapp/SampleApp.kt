@@ -2,6 +2,7 @@ package de.motiontag.sampleapp
 
 import android.app.Application
 import android.util.Log
+import de.motiontag.sampleapp.injections.Dagger
 import de.motiontag.sampleapp.utils.getForegroundNotification
 import de.motiontag.tracker.*
 
@@ -11,6 +12,8 @@ class SampleApp : Application(), MotionTag.Callback {
 
     override fun onCreate() {
         super.onCreate()
+        Dagger.init(this)
+        Dagger.getComponent().inject(this)
         val notification = getForegroundNotification()
         val motionTag = MotionTag.getInstance()
         motionTag.initialize(this, notification, this)
