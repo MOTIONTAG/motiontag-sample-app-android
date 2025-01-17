@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: "kotlin-kapt"
+apply plugin: 'com.google.devtools.ksp'
 
 android {
-    compileSdkVersion 33
     defaultConfig {
         applicationId "de.motiontag.sampleapp"
         minSdkVersion 23
-        targetSdkVersion 33
+        compileSdk 34
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -20,15 +20,17 @@ android {
     }
     // The SDK requires Java 8 support
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         viewBinding true
+        buildConfig = true
     }
+    namespace 'de.motiontag.sampleapp'
 }
 
 dependencies {
@@ -38,9 +40,9 @@ dependencies {
     implementation "de.motiontag:tracker:7.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:1.5.1"
-    implementation "androidx.core:core-ktx:1.9.0"
-    implementation "com.google.android.material:material:1.6.1"
-    implementation "com.google.dagger:dagger:2.44.2"
-    kapt "com.google.dagger:dagger-compiler:2.44.2"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.core:core-ktx:1.13.0"
+    implementation "com.google.android.material:material:1.12.0"
+    implementation "com.google.dagger:dagger:2.48"
+    ksp "com.google.dagger:dagger-compiler:2.48"
 }
