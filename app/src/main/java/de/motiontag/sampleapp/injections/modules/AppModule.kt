@@ -8,6 +8,6 @@ import javax.inject.Singleton
 @Module class AppModule(private val application: Application) {
 
     @Provides @Singleton
-    internal fun application(): Application = application
+    fun application(): Application = application
 
 }
